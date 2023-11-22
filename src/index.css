@@ -3,6 +3,8 @@
   --secondary-color: #526d82;
   --contemporary-color:#9DB2BF;
   --text-color: #DDE6ED;
+  --white: #fff;
+  --black: #000;
 }
 body {
   margin: 0;

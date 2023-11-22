@@ -16,7 +16,6 @@
   display: flex;
   flex-direction: column;
   height: 400px;
-  background-color: var(--se-color);
   border-radius: 0.5rem;
   padding: 20px;
   box-shadow: 0 0 10px rgba(82, 109, 130, 0.7); 
@@ -69,9 +68,18 @@
 }
 
 .link {
-  text-decoration: none;
+  text-decoration: underline;
   cursor: pointer;
   font-weight: 600;
   align-self: flex-end;
   margin-top: auto;
+}
+
+.link:hover {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.left_logo{
+  width: 220px;
 }
