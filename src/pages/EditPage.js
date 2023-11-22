@@ -23,6 +23,8 @@ const EditPage = () => {
                 }
             </div>
           </div>
+          <button className='edit_btn'>Copy ROOM ID</button>
+          <button className='edit_btn' >Leave</button>
         </div>
       </div>
     </>

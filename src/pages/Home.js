@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import logo from '../logo.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import toast from 'react-hot-toast';
 
 const Home = () => {
   const navigate = useNavigate(); 
@@ -12,12 +13,20 @@ const Home = () => {
   const createNewRoom = () => {
     const id = uuid();
     setRoomId(id);
-    
+    toast.success("Created a new room");
   };
 
   const handleJoinClick = () => {
-    if(!roomId || !username)
-      return;
+    if(!roomId || !username) {
+      if(!roomId) {
+        toast.error("RoomId is required");
+        return;
+      }
+      if(!username) {
+        toast.error("Username is required");
+        return;
+      }
+    }
     navigate(`/editor/${roomId}`,{state:{username}})
   };
 
