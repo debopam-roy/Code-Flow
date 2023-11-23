@@ -1,32 +1,26 @@
-import React from 'react';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css'; // Choose your preferred theme
-import 'codemirror/mode/javascript/javascript'; // Choose the appropriate mode for your use case
-import { Controlled as CodeMirror } from 'react-codemirror2';
-import 'codemirror/addon/edit/closebrackets';
-import 'codemirror/addon/edit/matchbrackets';
+import React, { useRef, useEffect } from 'react'
+
+import { EditorState } from '@codemirror/state'
+import { EditorView, keymap } from '@codemirror/view'
+import { defaultKeymap } from '@codemirror/commands'
+
 const Editor = () => {
-  const options = {
-    mode: 'javascript',
-    theme: 'material', // Choose your preferred theme
-    lineNumbers: true,
-    autoCloseBrackets: true,
-    matchBrackets: true,
-  };
+  const editor = useRef()
 
-  const handleChange = (editor, data, value) => {
-    // Handle changes in the editor content
-  };
+  useEffect(() => {
+    const startState = EditorState.create({
+      doc: '// Your code goes here.',
+      extensions: [keymap.of(defaultKeymap)],
+    })
 
-  return (
-    <div>
-      <CodeMirror
-        value="const example = 'Hello, CodeMirror!';"
-        options={options}
-        onBeforeChange={(editor, data, value) => handleChange(editor, data, value)}
-      />
-    </div>
-  );
-}
+    const view = new EditorView({ state: startState, parent: editor.current })
 
-export default Editor
+    return () => {
+      view.destroy()
+    }
+  }, [])
+
+  return <div className='editor' ref={editor}></div>
+};
+
+export default Editor;
