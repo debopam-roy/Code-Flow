@@ -13,23 +13,23 @@ function App() {
           toastOptions={{
             success: {
               style: {
-                background: 'var(--primary-color)',
+                background: 'var(--secondary-color)',
                 color:'var(--text-color)',
                 boxShadow: '0 0 10px rgba(82, 109, 130, 0.7)'
               },
               iconTheme: {
-                primary: 'var(--secondary-color)',
+                primary: 'var(--primary-color)',
                 secondary: 'var(--text-color)',
               },
             },
             error: {
               style: {
-                background: 'var(--primary-color)',
+                background: 'var(--secondary-color)',
                 color:'var(--text-color)',
                 boxShadow: '0 0 10px rgba(82, 109, 130, 0.7)'
               },
               iconTheme: {
-                primary: 'var(--secondary-color)',
+                primary: 'var(--primary-color)',
                 secondary: 'var(--text-color)',
               },
             },

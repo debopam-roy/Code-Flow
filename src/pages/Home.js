@@ -1,4 +1,3 @@
-import '../App.css';
 import React, { useState } from 'react';
 import logo from '../logo.png';
 import { useNavigate, Link } from 'react-router-dom';
@@ -45,9 +44,9 @@ const Home = () => {
           <input
             type="text"
             id="roomIdInput"
-            className='input'
+            className='input '
             autoComplete='off'
-            placeholder='Enter Room Id'
+            placeholder='ENTER ROOM ID'
             value={roomId}
             onKeyUp={handleKeyUpEvent} 
             onChange={(e) => { setRoomId(e.target.value) }}
@@ -56,9 +55,9 @@ const Home = () => {
           <input
             type="text"
             id="usernameInput"
-            className='input'
+            className='input username-input'
             autoComplete='off'
-            placeholder='Enter Username'
+            placeholder='ENTER USER NAME'
             value={username}
             onKeyUp={handleKeyUpEvent} 
             onChange={(e) => { setUsername(e.target.value) }}
