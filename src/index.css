@@ -3,8 +3,9 @@
   --secondary-color: #526d82;
   --contemporary-color:#9DB2BF;
   --text-color: #DDE6ED;
-  --white: #fff;
-  --black: #000;
+  --white: #FDFBF9;
+  --black: #282828;
+  --red: #B33F40;
 }
 body {
   margin: 0;

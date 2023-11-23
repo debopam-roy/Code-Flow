@@ -56,36 +56,43 @@
   color: var(--contemporary-color);
 }
 
-.btn {
-  margin: 0.8rem;
+.btn,
+.edit_btn,
+.leave_btn {
+  border: none;
+  outline: none;
+  margin: 0.8rem ;
+  font-weight: bold;
   border-radius: 0.2rem;
-  align-self: flex-end;
   padding: 0.7rem 1.5rem;
   background-color: var(--secondary-color);
-  border: none;
-  font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+.btn {
+  align-self: flex-end;
 }
 
 .edit_btn {
-  margin: 0.1rem 0 1rem 0;
-  border-radius: 0.2rem;
-  border: 0;
-  width: 70%;
-  font-weight: 600;
-  padding: 0.7rem 1.5rem;
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  outline: none;
+  margin: 0.3rem;
+  width: 80%;
 }
-.leave_btn{
-  background-color: red;
 
-}
+
+
 .btn:hover,
 .edit_btn:hover {
-  background-color: var(--text-color);
+  background-color: var(--white);
   color: var(--secondary-color);
+}
+
+.leave_btn {
+  background-color: var(--red);
+}
+
+.leave_btn:hover{
+  color: var(--red);
 }
 
 .invitation {
@@ -116,7 +123,7 @@
 }
 
 .leftContainer {
-  padding: 1rem .5;
+  padding: 1rem 0.5rem;
   background-color: var(--black);
   display: flex;
   flex-direction: column;
@@ -129,7 +136,6 @@
   border-bottom: 0.1rem solid var(--primary-color);
   margin-bottom: 0.5rem;
 }
-
 
 .clientslist {
   padding: 1rem;
