@@ -159,6 +159,9 @@
   text-align: center;
 }
 
-.editor{
+.editorWrap{
   height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
