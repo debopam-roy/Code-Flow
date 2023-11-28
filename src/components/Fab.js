@@ -1,13 +1,17 @@
-import React from 'react'
-import { IoIosSettings } from "react-icons/io";
+import React from 'react';
+import { BsGearWideConnected } from "react-icons/bs";
 
 const Fab = () => {
   return (
-    <div className='fabContainer' style={{ backgroundColor:"transparent",textAlign:'right', padding:"20px", zIndex: 1000}}>
-        <IoIosSettings size="150px" color="white"/>
+    <div >
+      <div>
 
+      </div>
+      <div className="fab-main">
+        <BsGearWideConnected  size={30} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Fab;

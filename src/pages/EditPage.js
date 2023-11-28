@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from '../logo.png';
 import Client from '../components/Client';
 import Editor from '../components/Editor';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/mode/javascript/javascript';
-import CodeMirror from 'codemirror';
-import 'codemirror/theme/dracula.css'; 
 import Fab from '../components/Fab';
 
 const initialClients = [
@@ -21,23 +17,10 @@ const EditPage = () => {
   const [clients, setClients] = useState(initialClients);
   const [code, setCode] = useState('');
 
-  useEffect(() => {
-    const editor = CodeMirror(document.getElementById('editor'), {
-      
-      mode: 'javascript',
-      lineNumbers: false,
-      theme: 'dracula',
-    });
-  
-    // Set an event handler for changes
-    editor.on('change', (cm) => {
-      setCode(cm.getValue());
-    });
-  
-    return () => {
-    };
-  }, []);
-  
+  const handleCodeChange = (newCode) => {
+    setCode(newCode);
+  };
+
   return (
     <div className='editContainer'>
       <div className='leftContainer'>
@@ -56,9 +39,8 @@ const EditPage = () => {
         <button className='edit_btn leave_btn'>Exit</button>
       </div>
       <div className='editorWrap'>
-        <div id="editor"></div>
-        <Fab/>
-
+        <Editor onChange={handleCodeChange} />
+        <Fab />
       </div>
     </div>
   );

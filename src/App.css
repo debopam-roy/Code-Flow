@@ -165,3 +165,31 @@
   display: flex;
   flex-direction: column;
 }
+.fab-container{
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.fab-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--secondary-color);
+  border-radius: 50px;
+  z-index: 999;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(82, 109, 130, 0.7);
+  transition: transform 0.5s ease; /* Add smooth transition */
+}
+
+
+.fab-container:hover {
+  transform: rotate(60deg);
+}
