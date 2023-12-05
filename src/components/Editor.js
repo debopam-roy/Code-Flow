@@ -7,6 +7,7 @@ const Editor = ({ language, template, textSize, theme }) => {
   const [code, setCode] = useState('');
 
   //TODO: Use a module to generate the template for the code base selected...
+  //TODO: On copy and on paste
   
   return (
     <div style={{fontSize:textSize}}>
@@ -15,6 +16,7 @@ const Editor = ({ language, template, textSize, theme }) => {
         height="100vh"
         placeholder={template}
         theme={theme}
+        
         onChange={(newCode) => {
           setCode(newCode);
         }}
