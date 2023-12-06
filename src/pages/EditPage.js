@@ -1,4 +1,3 @@
-
 import logo from '../logo.png';
 import Fab from '../components/Fab';
 import React, { useEffect, useRef, useState } from 'react';
@@ -7,32 +6,11 @@ import Client from '../components/Client';
 import { abcdef, abyss, androidstudio, andromeda, atomone, aura, basicDark, bespin, copilot, darcula, dracula, duotoneDark, githubDark, materialDark, monokai, nord, okaidia, solarizedDark, sublime, vscodeDark, xcodeDark } from '@uiw/codemirror-themes-all';
 import initSocket from '../components/Socket';
 import ACTIONS from '../Actions';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import {toast} from 'react-hot-toast';
 
 
 const EditPage = () => {
-  const { roomId } = useParams();
-  const socketRef=useRef(null);
-  const location=useLocation();
-  useEffect(()=>{
-    const init = async () =>{
-      socketRef.current = await initSocket();
-      socketRef.current.emit(ACTIONS.JOIN,{
-        roomId:roomId,
-        username: location.state?.username,
-      });
-    };
-    init();
-  },[]);
-
-  const initialClients = [
-    { socketId: 1, username: "Rakesh K" },
-    { socketId: 2, username: "John Doe" },
-    { socketId: 3, username: "Jack Dan" },
-    { socketId: 4, username: "Debopam Roy" },
-    { socketId: 5, username: "Rafikul Alam" },
-    { socketId: 6, username: "Afaque" },
-  ];
   const availableLanguages= ['C', 'C++', 'Java', 'Python', 'JavaScript'];
   const availableTemplates = {
     'C': '#include <stdio.h>\nint main() {\n  printf("Hello, World!\\n");\n  return 0;\n}',
@@ -41,13 +19,53 @@ const EditPage = () => {
     'Python': 'print("Hello, World!")',
     'JavaScript': 'console.log("Hello, World!");',
   };
-  
+  const { roomId } = useParams();
+  const socketRef=useRef(null);
+  const location=useLocation();
+  const pageNavigator=useNavigate();
+  const initialClients = [];
   const [theme, setTheme] = useState(abcdef);
   const [fontSize, setFontSize] = useState(12);
-  const [clients, setClients] = useState(initialClients);
+  const [clientsList, setClientsList] = useState(initialClients);
   const [language, setLanguage] = useState(availableLanguages[0]);
   const [template, setTemplate] = useState(availableTemplates[language]);
 
+
+  const handleError = (err) => {
+    console.log(err);
+    toast.error(`Oops! Socket connection wasn't sucessful.`);
+    pageNavigator('/');
+  };
+
+  useEffect(()=>{
+    const init = async () =>{
+      socketRef.current = await initSocket();
+      socketRef.current.on('connect_error',(err)=>handleError(err))
+      socketRef.current.on('connect_failed',(err)=>handleError(err))
+      socketRef.current.emit(ACTIONS.JOIN,{
+        roomId,
+        username: location.state?.username,
+      });
+      socketRef.current.on(ACTIONS.JOINED,({clients, username, socketId}) => {
+        let joiningPopUp;
+        if(username !== location.state?.username)
+        {
+          joiningPopUp=`${username} joined.`;
+        }
+        else{
+          joiningPopUp=`You have joined.`;
+        }
+        toast.success(joiningPopUp);
+        setClientsList(clients);
+        console.log(clients);
+      });
+    };
+    init();
+  },[]);
+
+  
+  
+  
   const handleThemeChange = () => {
     const availableThemes = [abcdef, abyss, androidstudio, andromeda, atomone, aura, basicDark, bespin, copilot, darcula, dracula, duotoneDark, githubDark, materialDark, monokai, nord, okaidia, solarizedDark, sublime, vscodeDark, xcodeDark];
     const currentThemeIndex = availableThemes.indexOf(theme);
@@ -78,7 +96,7 @@ const EditPage = () => {
          </div>
          <h3>Connected</h3>
          <div className='clientslist'>
-           {clients.map((client) => (
+           {clientsList.map((client) => (
              <Client key={client.socketId} username={client.username} />
            ))}
          </div>

@@ -33,6 +33,7 @@ function App() {
                 secondary: 'var(--text-color)',
               },
             },
+          
           }}
         />
       </div>

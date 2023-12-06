@@ -1,14 +1,7 @@
 import {io} from  'socket.io-client';
 
 const initSocket = async () => {
-    const options = {
-        'force new connection': true,
-        reconnectionAttempt: 'Infinity',
-        timeout: 10000,
-        transports: ['websockets']
-    };
-
-    return io(process.env.REACT_APP_BACKEND_URL,options);
+    return io.connect("http://192.168.0.102:4001");
 };
 
 
