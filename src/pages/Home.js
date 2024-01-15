@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
-import toast from 'react-hot-toast';
-import logo from '../logo.png';
+import React, { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { v4 as uuid } from "uuid";
+import toast from "react-hot-toast";
+import logo from "../assets/logo.png";
+import axios from "axios";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [roomId, setRoomId] = useState('');
-  const [username, setUsername] = useState('');
+  const [roomId, setRoomId] = useState("");
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/join", { withCredentials: true })
+      .then((response) => {
+        if (!response) {
+          setUsername("");
+        } else {
+          setUsername(response.data?.data.fullName);
+        }
+      })
+      .catch();
+  }, []);
 
   const createNewRoom = () => {
     const newRoomId = uuid();
     setRoomId(newRoomId);
-    toast.success('Created a new room');
+    toast.success("Created a new room");
   };
 
   const handleJoinClick = () => {
     if (!roomId || !username) {
-      toast.error(!roomId ? 'RoomId is required' : 'Username is required');
+      toast.error(!roomId ? "RoomId is required" : "Username is required");
       return;
     }
     navigate(`/editor/${roomId}`, { state: { username } });
   };
 
   const handleKeyUpEvent = (e) => {
-    if (e.code === 'Enter') {
+    if (e.code === "Enter") {
       handleJoinClick();
     }
   };

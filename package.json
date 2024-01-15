@@ -10,6 +10,7 @@
     "@uiw/codemirror-extensions-langs": "^4.21.21",
     "@uiw/codemirror-themes-all": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
+    "axios": "^1.6.5",
     "fs": "0.0.1-security",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
@@ -27,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "BROWSER=none nodemon index.js"
+    "dev": "BROWSER=none nodemon index.js",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +51,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "prettier": "^3.2.2"
   }
 }
