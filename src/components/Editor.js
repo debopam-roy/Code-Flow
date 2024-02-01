@@ -18,7 +18,7 @@ const Editor = ({ language, template, textSize, theme }) => {
         theme={theme}
         onChange={(newCode) => {
           console.log(newCode.length());
-          if (newCode.length() == 0) {
+          if (newCode.length() === 0) {
             setCode(template);
           }
           setCode(newCode);

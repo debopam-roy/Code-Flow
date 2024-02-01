@@ -11,16 +11,17 @@ const Home = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/join", { withCredentials: true })
-      .then((response) => {
-        if (!response) {
-          setUsername("");
-        } else {
-          setUsername(response.data?.data.fullName);
-        }
-      })
-      .catch();
+    // axios
+    //   .get("http://localhost:4000/api/join", { withCredentials: true })
+    //   .then((response) => {
+    //     if (!response) {
+    //       setUsername("");
+    //     } else {
+    //       setUsername(response.data?.data.fullName);
+    //     }
+    //   })
+    //   .catch();
+    setUsername("");
   }, []);
 
   const createNewRoom = () => {

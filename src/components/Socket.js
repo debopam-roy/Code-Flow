@@ -1,7 +1,13 @@
 import { io } from "socket.io-client";
 
 const initSocket = async () => {
-  return io.connect("http://192.168.0.102:4001");
+  const socket = io.connect("http://localhost:4000/editor/");
+  
+  socket.on('connect_error', (error) => {
+    console.log("Hello therererererere!");
+    console.error('Socket connection error:', error);
+  });
+  return socket;
 };
 
 export default initSocket;
