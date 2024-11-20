@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Build output
+/dist
+/build
+
+# IDE or editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Coverage directory from testing
+coverage/
+
+# Dependency directories
+bower_components/
+
+# System files
+*.swp
+*.swo
