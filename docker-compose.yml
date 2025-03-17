@@ -1,0 +1,103 @@
+services:
+  # NestJS Service
+  nestjs:
+    build: .
+    container_name: codeflow-app
+    ports:
+      - "3000:3000"  
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
+      - REDIS_URI=redis://redis:6379
+      - POSTGRES_URI=postgresql://postgres:postgres@postgres:5432/mydatabase
+    depends_on:
+      - postgres
+      - redis
+      - mongo
+    networks:
+      - app-network
+
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - "27017:27017"  # MongoDB database
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  # MongoDB GUI (Mongo Express)
+  mongo-express:
+    image: mongo-express:1-18-alpine3.18
+    container_name: mongo-express
+    ports:
+      - "8081:8081"  # Mongo Express web interface
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/mydatabase
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  # Redis Service
+  redis:
+    image: redis:6-alpine
+    container_name: redis-db
+    ports:
+      - "6379:6379"  # Redis database
+    networks:
+      - app-network
+
+  # Optimized Redis UI (Redis Commander)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    ports:
+      - "8082:8081"  # Redis Commander web interface
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+  # PostgreSQL Service
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    ports:
+      - "5433:5432"  # PostgreSQL database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: codeflow_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # Optimized PostgreSQL UI (pgAdmin)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    ports:
+      - "5050:80"  # pgAdmin web interface
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
+  postgres-data:
+    driver: local

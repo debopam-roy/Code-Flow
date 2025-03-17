@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URI")
+}
+
+model User { 
+  n_id                  Int      @id @default(autoincrement())
+
+  dt_user_created_at    DateTime @default(now())
+  dt_user_updated_at    DateTime @updatedAt
+
+  b_is_verified         Boolean  @default(false)
+  b_is_active           Boolean  @default(true)
+
+  s_profile_picture     String   @db.VarChar(500)
+  s_name                String   @db.VarChar(100)
+  s_email               String   @unique @db.VarChar(100)
+  s_gender              String   @db.VarChar(6)
+  s_password            String   @db.VarChar(200)
+  s_phone_number               String?  @db.VarChar(20)
+  s_address             String?  @db.VarChar(300)
+  s_country             String?  @db.VarChar(20)
+  s_date_of_birth       DateTime?    @db.Date
+
+  @@map("tbl_user_credential")  
+}
